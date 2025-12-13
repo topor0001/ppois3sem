@@ -207,11 +207,10 @@ class Rectangle:
     def __deepcopy__(self, memo):
         return self.copy()
 
-def rectangle_from_string(string_repr):
-    """Creating a rectangle from a string (external function)"""
-    return Rectangle().from_string(string_repr)
+    def rectangle_from_string(string_repr):
+        """Creating a rectangle from a string (external function)"""
+        return Rectangle().from_string(string_repr)
 
-
-def create_rectangle_default():
-    """Create a rectangle with default settings"""
-    return Rectangle()
+    def create_rectangle_default():
+        """Create a rectangle with default settings"""
+        return Rectangle()
