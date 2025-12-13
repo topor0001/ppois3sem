@@ -146,7 +146,7 @@ class Set:
         return f"Set(elements={len(self._elements)})"
 
     def __iter__(self):
-        return _SetIterator(self._elements)
+        return self.SetIterator(self._elements)
 
     def __len__(self):
         return len(self._elements)
@@ -278,32 +278,31 @@ class Set:
     def __del__(self):
         Set._set_counter -= 1
 
-def set_from_string(string_repr):
-    """Creating a set from a string (external function)"""
-    return Set().from_string(string_repr)
+    def set_from_string(string_repr):
+        """Creating a set from a string (external function)"""
+        return Set().from_string(string_repr)
 
 
-def create_empty_set():
-    """Creating an empty set"""
-    return Set()
+    def create_empty_set():
+        """Creating an empty set"""
+        return Set()
 
 
-def create_set_from_elements(elements):
-    """Creating a set from a list of elements"""
-    return Set(elements)
+    def create_set_from_elements(elements):
+        """Creating a set from a list of elements"""
+        return Set(elements)
 
+    class SetIterator:
+        def __init__(self, elements):
+            self._elements = elements
+            self._index = 0
 
-class _SetIterator:
-    def __init__(self, elements):
-        self._elements = elements
-        self._index = 0
+        def __iter__(self):
+            return self
 
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        if self._index < len(self._elements):
-            result = self._elements[self._index]
-            self._index += 1
-            return result
-        raise StopIteration
+        def __next__(self):
+            if self._index < len(self._elements):
+                result = self._elements[self._index]
+                self._index += 1
+                return result
+            raise StopIteration
